@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/DayLoop/DayLoopTalk.unity
+    guid: b8a24c6f53867504b8d79d9b7c5a27d6
+  - enabled: 1
+    path: Assets/Scenes/DayLoop/DayLoopVote.unity
+    guid: bd461a9568d653048be46cbd6f3e9549
+  - enabled: 0
+    path: 
+    guid: 20f063ff217463345920b6220307c3c5
+  - enabled: 1
+    path: Assets/Scenes/NightLoop/NightLoopSwitcher.unity
+    guid: c346d98df8058154badb63002bad48a0
+  - enabled: 1
+    path: Assets/Scenes/NightLoop/NightLoopCivilianTask.unity
+    guid: 4f6f74f8771b8b040be04e665bacaa18
+  - enabled: 1
+    path: Assets/Scenes/NightLoop/NightLoopMafiaTask.unity
+    guid: 86c66e6fbce420b498702e0764019343
+  - enabled: 1
+    path: Assets/Scenes/Winners/CiviliansWon.unity
+    guid: 0792c9ef43d6c7c4898ffc68dc66505a
+  - enabled: 1
+    path: Assets/Scenes/Winners/MafiasWon.unity
+    guid: ebfbb74cc0480af4b906247d001a6654
+  - enabled: 1
+    path: Assets/Scenes/Winners/NoOneWon.unity
+    guid: 83d14c1f743bf414e976b9470eef4032
+  - enabled: 1
+    path: Assets/Scenes/InputPlayersName.unity
+    guid: f9e736a9a057cd742930857d1c3e8a68
+  - enabled: 1
+    path: Assets/Scenes/ShowRole.unity
+    guid: 9e7a9af8f52e53d46acf182ec7dea9bd
+  - enabled: 1
+    path: Assets/Scenes/StartGame.unity
+    guid: 0e0db91d76aad6c479d242b0da17b199
+  - enabled: 1
+    path: Assets/Scenes/DiedPlayers.unity
+    guid: 7876053cc5c656c4e8c73ca07529dfa3
+  - enabled: 1
+    path: Assets/Scenes/LastWord.unity
+    guid: 9325786a7584ca34c9e3d5cf4f7f2603
+  - enabled: 1
+    path: Assets/Scenes/RepeatVote.unity
+    guid: ba480293c68b3d044846ec970c12b4d7
+  - enabled: 1
+    path: Assets/Scenes/RepeatVoteTalk.unity
+    guid: bc1913a93302cce42a60a79bc503d0e8
+  - enabled: 1
+    path: Assets/Scenes/Interrval/Morning.unity
+    guid: 592cd1ea90ffc374d9deb6a7b9645586
+  - enabled: 1
+    path: Assets/Scenes/Interrval/Night.unity
+    guid: fefe4b155d23dde46a9a72e7648fcae0
+  m_configObjects: {}
