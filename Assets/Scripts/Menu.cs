@@ -9,20 +9,43 @@ using TMPro;
 public class Menu : MonoBehaviour
 {
     public GameObject Alert;
-    public TMP_InputField NumberOfPlayersInputTMP; //it will be private
-    public static int NumberOfPlayers = 0;
+    public static GameObject NumberOfPlayersInputTMP;
+    public static GameObject doctor;
+    public static GameObject sheriff;
+    public static int NumberOfPlayers;
+    public static int NumberOfMafias = 1;
+    public static int NumberOfCivilians;
     public static int column = 0;
     public static int TalkTime = 60;
     public static bool FirstVote = true;
     public static bool LastWord = false;
-
-    // https://www.geeksforgeeks.org/different-ways-to-create-an-object-in-c-sharp/?ref=rp
-
+    
+    public void Start()
+    {
+        doctor = GameObject.Find("DoctorToggle");
+        sheriff = GameObject.Find("SheriffToggle");
+        NumberOfPlayersInputTMP = GameObject.Find("NumberOfPlayersInputTMP");
+    }
+    public void EndEdit()
+    {
+        if (NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text == "" || Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text) <= 3)
+        {
+            doctor.GetComponent<Toggle>().isOn = false;
+            sheriff.GetComponent<Toggle>().isOn = false;
+            doctor.GetComponent<Toggle>().interactable = false;
+            sheriff.GetComponent<Toggle>().interactable = false;
+        }
+        else
+        {
+            doctor.GetComponent<Toggle>().interactable = true;
+            sheriff.GetComponent<Toggle>().interactable = true;
+        }
+    }
     public void Ready()
     {
         column = 0;
         Debug.Log("RepeatVote.RepeartVote " + RepeatVote.RepeartVote);
-        NumberOfPlayers = Convert.ToInt32(NumberOfPlayersInputTMP.text);
+        NumberOfPlayers = Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text);
         if (NumberOfPlayers >= 3)
         {
             Player.Create();

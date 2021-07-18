@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+    public enum role
+    {
+        civilian,
+        mafia,
+        doctor,
+        sheiff
+    }
+    public enum status
+    {
+        alive,
+        die,
+        died
+    }
 public class Player : MonoBehaviour
 {
     public string nic = "Игрок ";
@@ -9,6 +22,8 @@ public class Player : MonoBehaviour
     public string role = "civilian";
     public int votes = 0;
     public static Player[] PlayersArray;
+    //role role = role.civilian;
+    //status status = status.alive;
 
     public static void Create()
     {
@@ -22,6 +37,7 @@ public class Player : MonoBehaviour
         }
         System.Random rnd = new System.Random();
         PlayersArray[rnd.Next(Menu.NumberOfPlayers)].role = "mafia";
+        //PlayersArray[rnd.Next(Menu.NumberOfPlayers)].role = role.mafia;
     }
     public static void ClearVotes()
     {
