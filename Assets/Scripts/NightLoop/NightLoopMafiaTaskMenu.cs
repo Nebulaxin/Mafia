@@ -56,7 +56,7 @@ public class NightLoopMafiaTaskMenu : MonoBehaviour
     }
     public void Next()
     {
-        Player.PlayersArray[IndexKilledPlayer].status = "die";
+        Player.PlayersArray[IndexKilledPlayer].status = status.die;
         ArrayToConsole.Output("Next");
         Menu.column++;
         Check.AlivePlayes("Morning", "NightLoopSwitcher");

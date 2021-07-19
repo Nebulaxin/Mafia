@@ -12,7 +12,7 @@ public class ShowRole : MonoBehaviour
 
     public void Start()
     {
-        if (Player.PlayersArray[Menu.column].role == "civilian")
+        if (Player.PlayersArray[Menu.column].role == role.civilian)
         {
             YourRoleTMP.text = "Вы мирный житель";
         }

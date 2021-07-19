@@ -17,13 +17,13 @@ public class Check : MonoBehaviour
         }
         switch (Player.PlayersArray[Menu.column].status)
         {
-            case "alive":
+            case status.alive:
                 SceneManager.LoadScene(SceneLivePlayers);
                 break;
-            case "die":
+            case status.die:
                 SceneManager.LoadScene(SceneLivePlayers);
                 break;
-            case "died":
+            case status.died:
                 ++Menu.column;
                 AlivePlayes(SceneEndOfArray, SceneLivePlayers);
                 break;
@@ -41,7 +41,7 @@ public class Check : MonoBehaviour
         }
         switch (Player.PlayersArray[Menu.column].status)
         {
-            case "died":
+            case status.died:
                 ++Menu.column;
                 AliveColumn();
                 break;
@@ -58,7 +58,7 @@ public class Check : MonoBehaviour
         }
         switch (Player.PlayersArray[DayLoopVote.i].status)
         {
-            case "died":
+            case status.died:
                 ++DayLoopVote.i;
                 AliveI();
                 break;
@@ -70,10 +70,10 @@ public class Check : MonoBehaviour
     {
         switch (Player.PlayersArray[Menu.column].role)
         {
-            case "civilian":
+            case role.civilian:
                 SceneManager.LoadScene("NightLoopCivilianTask");
                 break;
-            case "mafia":
+            case role.mafia:
                 SceneManager.LoadScene("NightLoopMafiaTask");
                 break;
             default:
@@ -87,18 +87,18 @@ public class Check : MonoBehaviour
         {
             switch (Player.PlayersArray[NightLoopMafiaTaskMenu.i].role)
             {
-                case "mafia":
+                case role.mafia:
                     ++NightLoopMafiaTaskMenu.i;
                     MafiaTask();
                     return;
             }
             switch (Player.PlayersArray[NightLoopMafiaTaskMenu.i].status)
             {
-                case "die":
+                case status.die:
                     ++NightLoopMafiaTaskMenu.i;
                     MafiaTask();
                     break;
-                case "died":
+                case status.died:
                     ++NightLoopMafiaTaskMenu.i;
                     MafiaTask();
                     break;
@@ -111,15 +111,15 @@ public class Check : MonoBehaviour
         Civilians = 0;
         for (int i = 0; i < Menu.NumberOfPlayers; i++)
         {
-            if (Player.PlayersArray[i].status == "alive")
+            if (Player.PlayersArray[i].status == status.alive)
             {
                 switch (Player.PlayersArray[i].role)
                 {
-                    case "mafia":
+                    case role.mafia:
                         Mafias++;
                         Debug.Log("Mafias " + Mafias);
                         break;
-                    case "civilian":
+                    case role.civilian:
                         Civilians++;
                         Debug.Log("Civilians " + Civilians);
                         break;

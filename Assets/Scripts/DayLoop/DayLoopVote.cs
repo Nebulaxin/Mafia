@@ -113,7 +113,7 @@ public class DayLoopVote : MonoBehaviour
                 }
                 if (numOfVoted == 1)
                 {
-                    Player.PlayersArray[indexes[0]].status = "die";
+                    Player.PlayersArray[indexes[0]].status = status.die;
                     SceneManager.LoadScene("DiedPlayers");
                 }
                 if (numOfVoted > 1)
@@ -123,7 +123,7 @@ public class DayLoopVote : MonoBehaviour
                         RepeatVote.RepeartVote = false;
                         for (int i = 0; i < numOfVoted; i++)
                         {
-                            Player.PlayersArray[indexes[i]].status = "die";
+                            Player.PlayersArray[indexes[i]].status = status.die;
                         }
                         SceneManager.LoadScene("DiedPlayers");
                     }

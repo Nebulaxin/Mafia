@@ -21,10 +21,10 @@ public class DiedPlayers : MonoBehaviour
     {
         for (int i = 0; i < Menu.NumberOfPlayers; i++)
         {
-            if (Player.PlayersArray[i].status == "die")
+            if (Player.PlayersArray[i].status == status.die)
             {
                 DiePlayers = true;
-                Player.PlayersArray[i].status = "died";
+                Player.PlayersArray[i].status = status.died;
                 DiedPlayer.text += Player.PlayersArray[i].nic + " ";
             }
         }
