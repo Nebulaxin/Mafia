@@ -39,7 +39,22 @@ public class Menu : MonoBehaviour
         {
             doctor.GetComponent<Toggle>().interactable = true;
             sheriff.GetComponent<Toggle>().interactable = true;
+            NumberOfCivilians = Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text) - NumberOfMafias;
+            if (doctor.GetComponent<Toggle>().isOn)
+            {
+                --NumberOfCivilians;
+            }
+            if (sheriff.GetComponent<Toggle>().isOn)
+            {
+                --NumberOfCivilians;
+            }
+            if (NumberOfCivilians < 2)
+            {
+                doctor.GetComponent<Toggle>().isOn = false;
+                sheriff.GetComponent<Toggle>().isOn = false;
+            }
         }
+
     }
     public void Ready()
     {

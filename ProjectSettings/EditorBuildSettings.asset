@@ -30,6 +30,12 @@ EditorBuildSettings:
     path: Assets/Scenes/NightLoop/NightLoopMafiaTask.unity
     guid: 86c66e6fbce420b498702e0764019343
   - enabled: 1
+    path: Assets/Scenes/NightLoop/NightLoopDoctorTask.unity
+    guid: 0d5dedaf24e482e49a8d3bb1634a24e1
+  - enabled: 1
+    path: Assets/Scenes/NightLoop/NightLoopSheriffTask.unity
+    guid: 168c49df196fc8245b772db103fc2556
+  - enabled: 1
     path: Assets/Scenes/Winners/CiviliansWon.unity
     guid: 0792c9ef43d6c7c4898ffc68dc66505a
   - enabled: 1

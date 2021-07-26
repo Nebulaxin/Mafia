@@ -32,6 +32,5 @@ public class MenuToggles : MonoBehaviour
             }
         }
         Debug.Log(name + " is " + ThisToggle.GetComponent<Toggle>().isOn + " end");
-
     }
 }

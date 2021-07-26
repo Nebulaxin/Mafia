@@ -148,9 +148,9 @@ GameObject:
   - component: {fileID: 8489448534200109980}
   - component: {fileID: 7216549569934795928}
   m_Layer: 8
-  m_Name: KillButton
+  m_Name: HealButton
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -232,9 +232,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
-    m_HighlightedColor: {r: 1, g: 0.514151, b: 0.514151, a: 1}
-    m_PressedColor: {r: 0.6698113, g: 0, b: 0, a: 1}
-    m_SelectedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.51478064, g: 1, b: 0.5137255, a: 1}
+    m_PressedColor: {r: 0, g: 0.67058825, b: 0, a: 1}
+    m_SelectedColor: {r: 0, g: 1, b: 0, a: 1}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

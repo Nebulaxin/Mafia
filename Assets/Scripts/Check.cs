@@ -7,6 +7,7 @@ public class Check : MonoBehaviour
 {
     private static int Civilians = 0;
     private static int Mafias = 0;
+    private static string[] NextScenes = { "NightLoopCivilianTask", "NightLoopMafiaTask", "NightLoopDoctorTask", "NightLoopSheriffTask" };
 
     public static void AlivePlayes(string SceneEndOfArray, string SceneLivePlayers)
     {
@@ -68,40 +69,43 @@ public class Check : MonoBehaviour
     }
     public static void Role()
     {
-        switch (Player.PlayersArray[Menu.column].role)
+        SceneManager.LoadScene(NextScenes[(int)Player.PlayersArray[Menu.column].role]);
+    }
+    public static void NightMafiaTask()
+    {
+        if (NightLoopMafiaTask.i < Menu.NumberOfPlayers)
         {
-            case role.civilian:
-                SceneManager.LoadScene("NightLoopCivilianTask");
-                break;
-            case role.mafia:
-                SceneManager.LoadScene("NightLoopMafiaTask");
-                break;
-            default:
-                Debug.Log("NightLoopSwitcher Next()");
-                break;
+            if (Player.PlayersArray[NightLoopMafiaTask.i].role == role.mafia)
+            {
+                ++NightLoopMafiaTask.i;
+                NightMafiaTask();
+                return;
+            }
+            switch (Player.PlayersArray[NightLoopMafiaTask.i].status)
+            {
+                case status.died:
+                    ++NightLoopMafiaTask.i;
+                    NightMafiaTask();
+                    break;
+            }
         }
     }
-    public static void MafiaTask()
+    public static void NightDoctorTask()
     {
-        if (NightLoopMafiaTaskMenu.i < Menu.NumberOfPlayers)
+        if (NightLoopDoctorTask.i < Menu.NumberOfPlayers)
         {
-            switch (Player.PlayersArray[NightLoopMafiaTaskMenu.i].role)
+            switch (Player.PlayersArray[NightLoopDoctorTask.i].status)
             {
-                case role.mafia:
-                    ++NightLoopMafiaTaskMenu.i;
-                    MafiaTask();
-                    return;
-            }
-            switch (Player.PlayersArray[NightLoopMafiaTaskMenu.i].status)
-            {
-                case status.die:
-                    ++NightLoopMafiaTaskMenu.i;
-                    MafiaTask();
-                    break;
                 case status.died:
-                    ++NightLoopMafiaTaskMenu.i;
-                    MafiaTask();
+                    ++NightLoopDoctorTask.i;
+                    NightDoctorTask();
                     break;
+            }
+            if (Player.PlayersArray[NightLoopDoctorTask.i].health == health.healed)
+            {
+                ++NightLoopDoctorTask.i;
+                NightDoctorTask();
+                return;
             }
         }
     }
@@ -113,16 +117,15 @@ public class Check : MonoBehaviour
         {
             if (Player.PlayersArray[i].status == status.alive)
             {
-                switch (Player.PlayersArray[i].role)
+                if (Player.PlayersArray[i].role == role.mafia)
                 {
-                    case role.mafia:
-                        Mafias++;
-                        Debug.Log("Mafias " + Mafias);
-                        break;
-                    case role.civilian:
-                        Civilians++;
-                        Debug.Log("Civilians " + Civilians);
-                        break;
+                    Mafias++;
+                    Debug.Log("Mafias " + Mafias);
+                }
+                else
+                {
+                    Civilians++;
+                    Debug.Log("Civilians " + Civilians);
                 }
             }
         }

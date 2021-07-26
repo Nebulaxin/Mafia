@@ -21,7 +21,7 @@ public class DiedPlayers : MonoBehaviour
     {
         for (int i = 0; i < Menu.NumberOfPlayers; i++)
         {
-            if (Player.PlayersArray[i].status == status.die)
+            if (Player.PlayersArray[i].status == status.die && Player.PlayersArray[i].health != health.heal)
             {
                 DiePlayers = true;
                 Player.PlayersArray[i].status = status.died;
@@ -34,7 +34,7 @@ public class DiedPlayers : MonoBehaviour
             DiedPlayer.text = "Никто из игроков не покидает игру";
         }
         DiePlayers = false;
-        ArrayToConsole.Output("FindDiedPlayer");
+        ArrayToConsole.Output("DiedPlayers");
     }
     public void Next()
     {

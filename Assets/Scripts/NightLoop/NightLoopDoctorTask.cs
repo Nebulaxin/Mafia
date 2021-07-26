@@ -5,11 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class NightLoopMafiaTaskMenu : MonoBehaviour
+public class NightLoopDoctorTask : MonoBehaviour
 {
-    public GameObject KillButtonPrefab;
+    public GameObject HealButtonPrefab;
     public static GameObject NextButton;
-    public static int IndexKilledPlayer;
     public static int i;
 
     private static GameObject KillButton;
@@ -25,26 +24,22 @@ public class NightLoopMafiaTaskMenu : MonoBehaviour
         KillButton = GameObject.Find("KillButton");
         NextButton = GameObject.FindGameObjectWithTag("NextButton");
         NextButton.SetActive(false);
-
-        Debug.Log(NextButton);
-
+        
         PositionOfPrefabY = KillButton.transform.position.y;
         PositionOfPrefabX = KillButton.transform.position.x;
         HeightOfPrefab = 150; //Screen.height / 12.8f;
         WidthOfPrefab = 1000;//Screen.width / 1.08f;
         Margin = Screen.height / 10.10526315789474f;//HeightOfPrefab + Screen.height / 48;
         Debug.Log("Margin " + Margin);
-
-        Debug.Log(KillButton);
-        Debug.Log(PositionOfPrefabY);
+        ArrayToConsole.Output("NightLoopDoctorTask");
 
         for (i = 0; i < Menu.NumberOfPlayers; i++)
         {
-            Check.MafiaTask();
+            Check.NightDoctorTask();
             if (i < Menu.NumberOfPlayers)
             {
                 PositionOfPrefabY -= Margin;
-                InstantiatedGameObject = Instantiate(KillButtonPrefab, new Vector3(PositionOfPrefabX, PositionOfPrefabY, 0), Quaternion.identity);
+                InstantiatedGameObject = Instantiate(HealButtonPrefab, new Vector3(PositionOfPrefabX, PositionOfPrefabY, 0), Quaternion.identity);
                 InstantiatedGameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, WidthOfPrefab);
                 InstantiatedGameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, HeightOfPrefab);
                 InstantiatedGameObject.transform.SetParent(GameObject.Find("Canvas").transform);
@@ -56,7 +51,7 @@ public class NightLoopMafiaTaskMenu : MonoBehaviour
     }
     public void Next()
     {
-        Player.PlayersArray[IndexKilledPlayer].status = status.die;
+        Player.PlayersArray[ButtonInList.IndexSelectedPlayer].health = health.heal;
         ArrayToConsole.Output("Next");
         Menu.column++;
         Check.AlivePlayes("Morning", "NightLoopSwitcher");

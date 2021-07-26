@@ -15,9 +15,21 @@ public class DayLoopTalk : MonoBehaviour
 
     void Start()
     {
+        for (int i = 0; i < Menu.NumberOfPlayers; i++)
+        {
+            if (Player.PlayersArray[i].health == health.heal)
+            {
+                Player.PlayersArray[i].health = health.healed;
+            }
+            else if (Player.PlayersArray[i].health == health.healed)
+            {
+                Player.PlayersArray[i].health = health.no;
+            }
+        }
         Check.AliveColumn();
         NameOfPlayerTMP.text = Player.PlayersArray[Menu.column].nic + ", говорите";
         DiedPlayers.NextScene = "Night";
+        ArrayToConsole.Output("DayLoopTalk");
     }
     void Update()
     {
