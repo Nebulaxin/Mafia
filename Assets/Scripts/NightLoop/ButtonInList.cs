@@ -24,4 +24,19 @@ public class ButtonInList : MonoBehaviour
                 break;
         }
     }
+    public void ShowRole()
+    {
+        IndexSelectedPlayer = Convert.ToInt32(name);
+        NightLoopSheriffTask.NextButton.SetActive(true);
+        NightLoopSheriffTask.RoleTMP.SetActive(true);
+        NightLoopSheriffTask.ListOfButtons.SetActive(false);
+        if (Player.PlayersArray[Convert.ToInt32(name)].role == role.mafia)
+        {
+            NightLoopSheriffTask.RoleTMP.GetComponentInChildren<TMP_Text>().text = Player.PlayersArray[Convert.ToInt32(name)].nic.ToString() + " мафия";
+        }
+        else
+        {
+            NightLoopSheriffTask.RoleTMP.GetComponentInChildren<TMP_Text>().text = Player.PlayersArray[Convert.ToInt32(name)].nic.ToString() + " не мафия";
+        }
+    }
 }

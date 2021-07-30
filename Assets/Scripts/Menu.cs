@@ -10,6 +10,7 @@ public class Menu : MonoBehaviour
 {
     public GameObject Alert;
     public static GameObject NumberOfPlayersInputTMP;
+    public static GameObject TalkTimeInputTMP;
     public static GameObject doctor;
     public static GameObject sheriff;
     public static int NumberOfPlayers;
@@ -22,9 +23,11 @@ public class Menu : MonoBehaviour
     
     public void Start()
     {
+        RepeatVote.RepeartVote = false;
         doctor = GameObject.Find("DoctorToggle");
         sheriff = GameObject.Find("SheriffToggle");
         NumberOfPlayersInputTMP = GameObject.Find("NumberOfPlayersInputTMP");
+        TalkTimeInputTMP = GameObject.Find("TalkTimeInputTMP");
     }
     public void EndEdit()
     {
@@ -61,6 +64,7 @@ public class Menu : MonoBehaviour
         column = 0;
         Debug.Log("RepeatVote.RepeartVote " + RepeatVote.RepeartVote);
         NumberOfPlayers = Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text);
+        TalkTime = Convert.ToInt32(TalkTimeInputTMP.GetComponent<TMP_InputField>().text);
         if (NumberOfPlayers >= 3)
         {
             Player.Create();

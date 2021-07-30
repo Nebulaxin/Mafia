@@ -11,10 +11,11 @@ public class DayLoopTalk : MonoBehaviour
 {
     public TMP_Text TimerTMP;
     public TMP_Text NameOfPlayerTMP;
-    public float SeconsLeft = Menu.TalkTime;
+    public float SeconsLeft;
 
     void Start()
     {
+        SeconsLeft = Menu.TalkTime;
         for (int i = 0; i < Menu.NumberOfPlayers; i++)
         {
             if (Player.PlayersArray[i].health == health.heal)
@@ -30,6 +31,7 @@ public class DayLoopTalk : MonoBehaviour
         NameOfPlayerTMP.text = Player.PlayersArray[Menu.column].nic + ", говорите";
         DiedPlayers.NextScene = "Night";
         ArrayToConsole.Output("DayLoopTalk");
+        Debug.Log("Menu.TalkTime " + Menu.TalkTime);
     }
     void Update()
     {

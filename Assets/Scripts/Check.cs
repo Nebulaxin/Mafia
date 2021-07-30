@@ -90,6 +90,25 @@ public class Check : MonoBehaviour
             }
         }
     }
+    public static void NightSheriffTask()
+    {
+        if (NightLoopSheriffTask.i < Menu.NumberOfPlayers)
+        {
+            if (Player.PlayersArray[NightLoopSheriffTask.i].role == role.sheriff)
+            {
+                ++NightLoopSheriffTask.i;
+                NightSheriffTask();
+                return;
+            }
+            switch (Player.PlayersArray[NightLoopSheriffTask.i].status)
+            {
+                case status.died:
+                    ++NightLoopSheriffTask.i;
+                    NightSheriffTask();
+                    break;
+            }
+        }
+    }
     public static void NightDoctorTask()
     {
         if (NightLoopDoctorTask.i < Menu.NumberOfPlayers)

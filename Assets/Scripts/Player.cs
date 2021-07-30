@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     public role role = role.civilian;
     public status status = status.alive;
     public health health = health.no;
+    public bool check = false;
+    public bool a = false;
+
     private static int mafiaIndex = -1;
     private static int doctorIndex = -1;
     private static int sheriffIndex = -1;
