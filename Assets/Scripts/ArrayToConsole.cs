@@ -10,7 +10,6 @@ using TMPro;
 
 public class ArrayToConsole : MonoBehaviour
 {
-    /*
     public static void ClearLog()
     {
         var assembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
@@ -18,10 +17,9 @@ public class ArrayToConsole : MonoBehaviour
         var method = type.GetMethod("Clear");
         method.Invoke(new object(), null);
     }
-    */
     public static void Output(string VoidAndLine)
     {
-        //ClearLog();
+        ClearLog();
         Debug.Log("Output from " + VoidAndLine);
         for (int i = 0; i < Menu.NumberOfPlayers; i++)
         {

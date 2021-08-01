@@ -15,7 +15,7 @@ public class RepeatVote : MonoBehaviour
         Names.text = "";
         for (int i = 0; i < DayLoopVote.numOfVoted; i++)
         {
-            Names.text += Player.PlayersArray[DayLoopVote.indexes[i]].nic + " ";
+            Names.text += Player.PlayersArray[DayLoopVote.indexesNew[i]].nic + " ";
         }
     }
     public void Next()

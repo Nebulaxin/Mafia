@@ -17,7 +17,7 @@ public class RepeatVoteTalk : MonoBehaviour
 
     public void Start()
     {
-        NameOfPlayerTMP.text = Player.PlayersArray[DayLoopVote.indexes[NumOfPlayer]].nic + ", говорите";
+        NameOfPlayerTMP.text = Player.PlayersArray[DayLoopVote.indexesNew[NumOfPlayer]].nic + ", говорите";
     }
     void Update()
     {
@@ -35,7 +35,7 @@ public class RepeatVoteTalk : MonoBehaviour
             }
             else
             {
-                NameOfPlayerTMP.text = Player.PlayersArray[DayLoopVote.indexes[NumOfPlayer]].nic + ", говорите";
+                NameOfPlayerTMP.text = Player.PlayersArray[DayLoopVote.indexesNew[NumOfPlayer]].nic + ", говорите";
             }
             SeconsLeft = Menu.TalkTime;
         }

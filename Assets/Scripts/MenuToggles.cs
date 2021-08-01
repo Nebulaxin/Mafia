@@ -10,7 +10,6 @@ public class MenuToggles : MonoBehaviour
     public void OnValueChanged()
     {
         GameObject ThisToggle = GameObject.Find(name);
-        Debug.Log(name + " is "+ ThisToggle.GetComponent<Toggle>().isOn + " start");
         Menu.NumberOfCivilians = Convert.ToInt32(Menu.NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text) - Menu.NumberOfMafias;
         if (ThisToggle.GetComponent<Toggle>().isOn)
         {
@@ -31,6 +30,5 @@ public class MenuToggles : MonoBehaviour
                 ThisToggle.GetComponent<Toggle>().isOn = false;
             }
         }
-        Debug.Log(name + " is " + ThisToggle.GetComponent<Toggle>().isOn + " end");
     }
 }

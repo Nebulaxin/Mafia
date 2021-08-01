@@ -16,7 +16,8 @@ public class DayLoopVote : MonoBehaviour
     public static int i;
     public static int max = 0;
     public static int numOfVoted = 0;
-    public static int[] indexes = new int[Menu.NumberOfPlayers];
+    public static int[] indexesOld = new int[Menu.NumberOfPlayers];
+    public static int[] indexesNew = new int[Menu.NumberOfPlayers];
 
     private GameObject InstantiatedGameObject;
     private GameObject MainCamera;
@@ -31,7 +32,18 @@ public class DayLoopVote : MonoBehaviour
     {
         max = 0;
         numOfVoted = 0;
-        indexes = new int[Menu.NumberOfPlayers];
+        if (!RepeatVote.RepeartVote)
+        {
+            for (int i = 0; i < Menu.NumberOfPlayers; i++)
+            {
+                indexesOld[i] = -1;
+            }
+        }
+        for (int i = 0; i < Menu.NumberOfPlayers; i++)
+        {
+            indexesNew[i] = -1;
+        }
+        Debuging();
         Check.AliveColumn();
         NameOfPlayerTMP.text = Player.PlayersArray[Menu.column].nic + ", выберите игрока, за которого проголосуете";
         NextButton = GameObject.FindGameObjectWithTag("NextButton");
@@ -73,7 +85,6 @@ public class DayLoopVote : MonoBehaviour
             {
                 Player.PlayersArray[Convert.ToInt32(IndexVotedPlayer)].votes += 1;
                 ArrayToConsole.Output("DayLoopVote Upate()");
-                Debug.Log("Not empty");
                 IndexVotedPlayer = null;
             }
             if (Menu.column != Menu.NumberOfPlayers)
@@ -84,7 +95,7 @@ public class DayLoopVote : MonoBehaviour
             else
             {
                 SeconsLeft = Menu.TalkTime;
-                ArrayToConsole.Output("FindDiedPlayer");
+                ArrayToConsole.Output("DayLoopVote");
                 for (int i = 0; i < Menu.NumberOfPlayers; i++)
                 {
                     if (max < Player.PlayersArray[i].votes)
@@ -98,7 +109,7 @@ public class DayLoopVote : MonoBehaviour
                     {
                         if (Player.PlayersArray[i].votes == max)
                         {
-                            indexes[numOfVoted] = i;
+                            indexesNew[numOfVoted] = i;
                             Debug.Log("indexes[] = " + i);
                             numOfVoted++;
                         }
@@ -113,7 +124,7 @@ public class DayLoopVote : MonoBehaviour
                 }
                 if (numOfVoted == 1)
                 {
-                    Player.PlayersArray[indexes[0]].status = status.die;
+                    Player.PlayersArray[indexesNew[0]].status = status.die;
                     SceneManager.LoadScene("DiedPlayers");
                 }
                 if (numOfVoted > 1)
@@ -121,18 +132,46 @@ public class DayLoopVote : MonoBehaviour
                     if (RepeatVote.RepeartVote)
                     {
                         RepeatVote.RepeartVote = false;
-                        for (int i = 0; i < numOfVoted; i++)
+                        Debuging();
+                        for (int i = 0; i < indexesNew.Length; i++)
                         {
-                            Player.PlayersArray[indexes[i]].status = status.die;
+                            Debug.Log("indexesOld[" + i + "] = " + indexesOld[i] + " indexesNew[" + i + "] = " + indexesNew[i]);
+                            if (indexesOld[i] != indexesNew[i])
+                            {
+                                RepeatVote.RepeartVote = true;
+                            }
                         }
-                        SceneManager.LoadScene("DiedPlayers");
+                        if (RepeatVote.RepeartVote)
+                        {
+                            for (int i = 0; i < indexesNew.Length; i++)
+                            {
+                                indexesOld[i] = indexesNew[i];
+                            }
+                            SceneManager.LoadScene("RepeatVote");
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("DiedPlayers");
+                            return;
+                        }
                     }
                     else
                     {
+                        for (int i = 0; i < indexesNew.Length; i++)
+                        {
+                            indexesOld[i] = indexesNew[i];
+                        }
                         SceneManager.LoadScene("RepeatVote");
+                        return;
                     }
+                    Debuging();
                 }
             }
         }
+    }
+    public static void Debuging()
+    {
+        Debug.Log("indexesOld[i] " + indexesOld[0] + indexesOld[1] + indexesOld[2]);
+        Debug.Log("indexesNew[i] " + indexesNew[0] + indexesNew[1] + indexesNew[2]);
     }
 }

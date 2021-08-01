@@ -16,6 +16,7 @@ public class DiedPlayers : MonoBehaviour
     {
         DiedPlayer.text = "";
         FindDiedPlayer();
+        DayLoopVote.Debuging();
     }
     public void FindDiedPlayer()
     {
@@ -34,7 +35,7 @@ public class DiedPlayers : MonoBehaviour
             DiedPlayer.text = "Никто из игроков не покидает игру";
         }
         DiePlayers = false;
-        ArrayToConsole.Output("DiedPlayers");
+        //ArrayToConsole.Output("DiedPlayers");
     }
     public void Next()
     {
