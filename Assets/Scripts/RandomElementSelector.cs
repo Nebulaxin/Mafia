@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RandomElementSelector : MonoBehaviour
 {
-    //it will need to updates with more roles
         public static IList<T> CollectAllowedElements<T>(IList<T> allElements, IList<T> excludedElements)
         {
             List<T> allowedElements = new List<T>();

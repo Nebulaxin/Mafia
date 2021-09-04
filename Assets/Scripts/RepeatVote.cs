@@ -7,15 +7,16 @@ using TMPro;
 public class RepeatVote : MonoBehaviour
 {
     public TMP_Text Names;
-    public static bool RepeartVote = false;
 
     private void Start()
     {
-        RepeartVote = true;
         Names.text = "";
-        for (int i = 0; i < DayLoopVote.numOfVoted; i++)
+        for (int i = 0; i < DayLoopVoteRepeat.indexesVotedNew.Length; i++)
         {
-            Names.text += Player.PlayersArray[DayLoopVote.indexesNew[i]].nic + " ";
+            if (DayLoopVoteRepeat.indexesVotedNew[i] != -1)
+            {
+                Names.text += Player.PlayersArray[DayLoopVoteRepeat.indexesVotedNew[i]].nic + " ";
+            }
         }
     }
     public void Next()

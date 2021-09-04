@@ -9,11 +9,11 @@ public class ShowRole : MonoBehaviour
 {
     public TMP_Text YourRoleTMP;
     public TMP_Text ButtonTextTMP;
-    private string[] YourRoleTexts = {"мирный житель", "мафия", "доктор", "шериф"};
+    private string[] YourRoleTexts = {"civilian", "mafia", "doctor", "sheriff"};
 
     public void Start()
     {
-        YourRoleTMP.text = "Вы " + YourRoleTexts[(int)Player.PlayersArray[Menu.column].role];
+        YourRoleTMP.text = "You are " + YourRoleTexts[(int)Player.PlayersArray[Menu.column].role];
         /*if (Player.PlayersArray[Menu.column].role == role.civilian)
         {
             YourRoleTMP.text = "Вы мирный житель";

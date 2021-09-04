@@ -12,10 +12,12 @@ public class DayLoopTalk : MonoBehaviour
     public TMP_Text TimerTMP;
     public TMP_Text NameOfPlayerTMP;
     public float SeconsLeft;
+    public bool takingAway;
 
     void Start()
     {
         SeconsLeft = Menu.TalkTime;
+        takingAway = false;
         for (int i = 0; i < Menu.NumberOfPlayers; i++)
         {
             if (Player.PlayersArray[i].health == health.heal)
@@ -28,47 +30,55 @@ public class DayLoopTalk : MonoBehaviour
             }
         }
         Check.AliveColumn();
-        NameOfPlayerTMP.text = Player.PlayersArray[Menu.column].nic + ", говорите";
+        NameOfPlayerTMP.text = Player.PlayersArray[Menu.column].nic + ", speak on";
         DiedPlayers.NextScene = "Night";
         ArrayToConsole.Output("DayLoopTalk");
-        Debug.Log("Menu.TalkTime " + Menu.TalkTime);
+        TimerTMP.text = SeconsLeft.ToString();
     }
     void Update()
     {
-        if (SeconsLeft > 0)
+        if(!takingAway && SeconsLeft > 0)
         {
-            SeconsLeft -= Time.deltaTime;
-            TimerTMP.text = Convert.ToString(Convert.ToInt32(SeconsLeft));
+            StartCoroutine(TimerTake());
         }
+    }
+    IEnumerator TimerTake()
+    {
+        takingAway = true;
+        SeconsLeft -= 1;
+        yield return new WaitForSeconds(1);
         if (SeconsLeft <= 0)
         {
-            SeconsLeft = Menu.TalkTime;
-            ++Menu.column;
-            Check.AliveColumn();
-
-            if (Menu.column == Menu.NumberOfPlayers)
-            {
-                Menu.column = 0;
-                if (Menu.FirstVote)
-                {
-                    SceneManager.LoadScene("DayLoopVote");
-                    Debug.Log("DayLoopVote");
-                }
-                else
-                {
-                    SceneManager.LoadScene("NightLoopSwitcher");
-                    Debug.Log("NightLoopSwitcher");
-                }
-            }
-            else
-            {
-                NameOfPlayerTMP.text = Player.PlayersArray[Menu.column].nic + ", говорите";
-                Debug.Log("Update else");
-            }
+            Next();
         }
+        TimerTMP.text = SeconsLeft.ToString();
+        takingAway = false;
     }
     public void Next()
     {
-        SeconsLeft = 0;
+        SeconsLeft = Menu.TalkTime;
+        ++Menu.column;
+        Check.AliveColumn();
+
+        if (Menu.column == Menu.NumberOfPlayers)
+        {
+            Menu.column = 0;
+            if (Menu.FirstVoiting)
+            {
+                SceneManager.LoadScene("DayLoopVote");
+                Debug.Log("DayLoopVote");
+            }
+            else
+            {
+                SceneManager.LoadScene("NightLoopSwitcher");
+                Debug.Log("NightLoopSwitcher");
+                Menu.FirstVoiting = true;
+            }
+        }
+        else
+        {
+            NameOfPlayerTMP.text = Player.PlayersArray[Menu.column].nic + ", speak on";
+            TimerTMP.text = SeconsLeft.ToString();
+        }
     }
 }

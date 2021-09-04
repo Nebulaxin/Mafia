@@ -5,21 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class Night : MonoBehaviour
 {
-    private float SeconsLeft = 3;
+    private float SeconsLeft;
+    private bool takingAway;
 
     void Start()
     {
-        RepeatVote.RepeartVote = false;
+        SeconsLeft = 3;
+        takingAway = false;
     }
     void Update()
     {
-        if (SeconsLeft > 0)
+        if (!takingAway && SeconsLeft > 0)
         {
-            SeconsLeft -= Time.deltaTime;
+            StartCoroutine(TimerTake());
         }
+    }
+    IEnumerator TimerTake()
+    {
+        takingAway = true;
+        SeconsLeft -= 1;
+        yield return new WaitForSeconds(1);
         if (SeconsLeft <= 0)
         {
             SceneManager.LoadScene("NightLoopSwitcher");
         }
+        takingAway = false;
     }
 }

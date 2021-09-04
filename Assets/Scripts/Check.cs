@@ -118,7 +118,7 @@ public class Check : MonoBehaviour
                 case status.died:
                     ++NightLoopDoctorTask.i;
                     NightDoctorTask();
-                    break;
+                    return;
             }
             if (Player.PlayersArray[NightLoopDoctorTask.i].health == health.healed)
             {
@@ -150,15 +150,18 @@ public class Check : MonoBehaviour
         }
         if (Mafias == 0 && Civilians == 0)
         {
-            SceneManager.LoadScene("NoOneWon");
+            Won.Winner = "Nobody have won the game!";
+            SceneManager.LoadScene("Won");
         }
         else if (Mafias == 0)
         {
-            SceneManager.LoadScene("CiviliansWon");
+            Won.Winner = "Mafia have won the game!";
+            SceneManager.LoadScene("Won");
         }
         else if (Mafias >= Civilians)
         {
-            SceneManager.LoadScene("MafiasWon");
+            Won.Winner = "Civilians have won the game!";
+            SceneManager.LoadScene("Won");
         }
         else
         {

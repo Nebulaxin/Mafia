@@ -9,8 +9,7 @@ public class NightLoopSheriffTask : MonoBehaviour
 {
     public GameObject CheckButtonPrefab;
     public static GameObject RoleTMP;
-    public static GameObject NextButton;
-    public static GameObject ListOfButtons;
+    public static GameObject Panel;
     public static int i;
 
     private static GameObject KillButton;
@@ -25,11 +24,9 @@ public class NightLoopSheriffTask : MonoBehaviour
     public void Start()
     {
         KillButton = GameObject.Find("KillButton");
-        NextButton = GameObject.FindGameObjectWithTag("NextButton");
         RoleTMP = GameObject.Find("RoleTMP");
+        Panel = GameObject.Find("Panel");
         RoleTMP.SetActive(false);
-        ListOfButtons = GameObject.Find("ListOfButtons");
-        NextButton.SetActive(false);
         
         PositionOfPrefabY = KillButton.transform.position.y;
         PositionOfPrefabX = KillButton.transform.position.x;
@@ -47,7 +44,7 @@ public class NightLoopSheriffTask : MonoBehaviour
                 InstantiatedGameObject = Instantiate(CheckButtonPrefab, new Vector3(PositionOfPrefabX, PositionOfPrefabY, 0), Quaternion.identity);
                 InstantiatedGameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, WidthOfPrefab);
                 InstantiatedGameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, HeightOfPrefab);
-                InstantiatedGameObject.transform.SetParent(ListOfButtons.transform);
+                InstantiatedGameObject.transform.SetParent(Panel.GetComponent<Transform>().transform);
                 InstantiatedGameObject.name = i.ToString();
                 InstantiatedGameObject.GetComponentInChildren<TMP_Text>().text = Player.PlayersArray[i].nic.ToString();
                 InstantiatedGameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
@@ -57,11 +54,11 @@ public class NightLoopSheriffTask : MonoBehaviour
                     InstantiatedGameObject.GetComponent<Button>().interactable = false;
                     if (Player.PlayersArray[i].role == role.mafia)
                     {
-                        InstantiatedGameObject.GetComponentInChildren<TMP_Text>().text = Player.PlayersArray[i].nic.ToString() + "(мафия)";
+                        InstantiatedGameObject.GetComponentInChildren<TMP_Text>().text = Player.PlayersArray[i].nic.ToString() + "(mafia)";
                     }
                     else
                     {
-                        InstantiatedGameObject.GetComponentInChildren<TMP_Text>().text = Player.PlayersArray[i].nic.ToString() + "(не мафия)";
+                        InstantiatedGameObject.GetComponentInChildren<TMP_Text>().text = Player.PlayersArray[i].nic.ToString() + "(isn't mafia)";
                     }
                 }
             }

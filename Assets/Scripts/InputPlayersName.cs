@@ -16,7 +16,7 @@ public class InputPlayersName : MonoBehaviour
     public void Start()
     {
         NumberOfPlayer++;
-        PlayersTextTMP.text = "Введите Ваше имя, Игрок " + NumberOfPlayer;
+        PlayersTextTMP.text = "Input your name, Player " + NumberOfPlayer;
         NamePlayerInputFieldTMP.text = Player.PlayersArray[Menu.column].nic;
     }
     public void Clear()

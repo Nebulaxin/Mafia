@@ -8,30 +8,40 @@ using TMPro;
 
 public class Menu : MonoBehaviour
 {
-    public GameObject Alert;
     public static GameObject NumberOfPlayersInputTMP;
     public static GameObject TalkTimeInputTMP;
     public static GameObject doctor;
     public static GameObject sheriff;
+    public Toggle FirstVoitingToggle;
+    public Toggle LastWordToggle;
+    public Toggle ShowPlayersRoleToggle;
     public static int NumberOfPlayers;
     public static int NumberOfMafias = 1;
     public static int NumberOfCivilians;
     public static int column = 0;
     public static int TalkTime = 60;
-    public static bool FirstVote = true;
-    public static bool LastWord = false;
+    public static bool FirstVoiting;
+    public static bool LastWord;
+    public static bool ShowPlayersRole;
     
     public void Start()
     {
-        RepeatVote.RepeartVote = false;
         doctor = GameObject.Find("DoctorToggle");
         sheriff = GameObject.Find("SheriffToggle");
         NumberOfPlayersInputTMP = GameObject.Find("NumberOfPlayersInputTMP");
         TalkTimeInputTMP = GameObject.Find("TalkTimeInputTMP");
     }
-    public void EndEdit()
+    public void EndEditNumberOfPlayers()
     {
-        if (NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text == "" || Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text) <= 3)
+        if (NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text == "" || Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text) < 3)
+        {
+            NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text = "3";
+        }
+        else if (Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text) > 100)
+        {
+            NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text = "100";
+        }
+        if (Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text) == 3)
         {
             doctor.GetComponent<Toggle>().isOn = false;
             sheriff.GetComponent<Toggle>().isOn = false;
@@ -57,27 +67,31 @@ public class Menu : MonoBehaviour
                 sheriff.GetComponent<Toggle>().isOn = false;
             }
         }
-
+    }
+    public void EndEditTime()
+    {
+        if (TalkTimeInputTMP.GetComponent<TMP_InputField>().text == "" || Convert.ToInt32(TalkTimeInputTMP.GetComponent<TMP_InputField>().text) <= 0)
+        {
+            TalkTimeInputTMP.GetComponent<TMP_InputField>().text = "60";
+        }
     }
     public void Ready()
     {
         column = 0;
-        Debug.Log("RepeatVote.RepeartVote " + RepeatVote.RepeartVote);
         NumberOfPlayers = Convert.ToInt32(NumberOfPlayersInputTMP.GetComponent<TMP_InputField>().text);
         TalkTime = Convert.ToInt32(TalkTimeInputTMP.GetComponent<TMP_InputField>().text);
-        if (NumberOfPlayers >= 3)
+        FirstVoiting = FirstVoitingToggle.isOn;
+        LastWord = LastWordToggle.isOn;
+        ShowPlayersRole = ShowPlayersRoleToggle.isOn;
+        Player.Create();
+        DayLoopVoteRepeat.indexesVotedOld = new int[NumberOfPlayers];
+        DayLoopVoteRepeat.indexesVotedNew = new int[NumberOfPlayers];
+        for (int i = 0; i < NumberOfPlayers; i++)
         {
-            Player.Create();
-            ArrayToConsole.Output("Ready()");
-            SceneManager.LoadScene("InputPlayersName");
+            DayLoopVoteRepeat.indexesVotedOld[i] = -1;
+            DayLoopVoteRepeat.indexesVotedNew[i] = -1;
         }
-        else
-        {
-            Alert.SetActive(true);
-        }
-    }
-    public void CloseAlert()
-    {
-        Alert.SetActive(false);
+        ArrayToConsole.Output("Ready()");
+        SceneManager.LoadScene("InputPlayersName");
     }
 }

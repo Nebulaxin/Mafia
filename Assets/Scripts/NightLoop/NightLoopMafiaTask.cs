@@ -13,6 +13,7 @@ public class NightLoopMafiaTask : MonoBehaviour
 
     private static GameObject KillButton;
     private GameObject InstantiatedGameObject;
+    private Transform Panel;
     private float PositionOfPrefabY;
     private float PositionOfPrefabX;
     private float WidthOfPrefab;
@@ -23,6 +24,7 @@ public class NightLoopMafiaTask : MonoBehaviour
     {
         KillButton = GameObject.Find("KillButton");
         NextButton = GameObject.FindGameObjectWithTag("NextButton");
+        Panel = GameObject.Find("Panel").transform;
         NextButton.SetActive(false);
         
         PositionOfPrefabY = KillButton.transform.position.y;
@@ -41,7 +43,7 @@ public class NightLoopMafiaTask : MonoBehaviour
                 InstantiatedGameObject = Instantiate(KillButtonPrefab, new Vector3(PositionOfPrefabX, PositionOfPrefabY, 0), Quaternion.identity);
                 InstantiatedGameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, WidthOfPrefab);
                 InstantiatedGameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, HeightOfPrefab);
-                InstantiatedGameObject.transform.SetParent(GameObject.Find("Canvas").transform);
+                InstantiatedGameObject.transform.SetParent(Panel);
                 InstantiatedGameObject.name = i.ToString();
                 InstantiatedGameObject.GetComponentInChildren<TMP_Text>().text = Player.PlayersArray[i].nic.ToString();
                 InstantiatedGameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);

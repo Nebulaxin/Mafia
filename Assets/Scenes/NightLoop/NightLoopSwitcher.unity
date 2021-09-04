@@ -388,7 +388,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u043E\u0447\u044C"
+  m_text: Night
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1b09692c8f2a8c7448813253c7fc40ef, type: 2}
   m_sharedMaterial: {fileID: 1726974058848457151, guid: 1b09692c8f2a8c7448813253c7fc40ef,
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0414\u0430\u043B\u0435\u0435"
+  m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1b09692c8f2a8c7448813253c7fc40ef, type: 2}
   m_sharedMaterial: {fileID: 1726974058848457151, guid: 1b09692c8f2a8c7448813253c7fc40ef,
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 1029606101}
   - component: {fileID: 1029606100}
   m_Layer: 5
-  m_Name: AreYouThisPlayer(TMP)
+  m_Name: PassPhone(TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -657,7 +657,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u041F\u0435\u0440\u0435\u0434\u0430\u0439\u0442\u0435 \u0442\u0435\u043B\u0435\u0444\u043E\u043D
-    \u0438\u0433\u0440\u043E\u043A\u0443 [\u0418\u043C\u044F]"
+    \u0438\u0433\u0440\u043E\u043A\u0443 [\u0418\u043C\u044F]\nPass your phone to
+    Player [Name]"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1b09692c8f2a8c7448813253c7fc40ef, type: 2}
   m_sharedMaterial: {fileID: 1726974058848457151, guid: 1b09692c8f2a8c7448813253c7fc40ef,

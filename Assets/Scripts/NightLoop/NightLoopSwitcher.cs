@@ -12,7 +12,7 @@ public class NightLoopSwitcher : MonoBehaviour
     {
         Check.AliveColumn();
         Debug.Log("Menu.column " + Menu.column);
-        AreYouThisPlayer.text = "Передайте телефон игроку " + Player.PlayersArray[Menu.column].nic;
+        AreYouThisPlayer.text = "Pass your phone to Player " + Player.PlayersArray[Menu.column].nic;
         DiedPlayers.NextScene = "DayLoopTalk";
     }
     public void Next()

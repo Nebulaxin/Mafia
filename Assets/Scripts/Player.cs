@@ -25,7 +25,7 @@ public enum health
 }
 public class Player : MonoBehaviour
 {
-    public string nic = "Игрок ";
+    public string nic = "Player ";
     public int votes = 0;
     public static Player[] PlayersArray;
     public role role = role.civilian;
@@ -69,28 +69,27 @@ public class Player : MonoBehaviour
     private static void DistributeDoctor()
     {
         System.Random rnd = new System.Random();
-        doctorIndex = rnd.Next(Menu.NumberOfPlayers);
-        if (doctorIndex != mafiaIndex)
+        int[] allNumbers = new int[Menu.NumberOfPlayers];
+        for (int i = 0; i < allNumbers.Length; ++i)
         {
-            PlayersArray[doctorIndex].role = role.doctor;
+            allNumbers[i] = i;
+            Debug.Log("allNumbers[" + i + "] = " + allNumbers[i] + ";");
         }
-        else
-        {
-            DistributeDoctor();
-        }
+        int[] excludedNumbers = { mafiaIndex };
+        doctorIndex = RandomElementSelector.SelectRandomElement(allNumbers, excludedNumbers);
+        PlayersArray[doctorIndex].role = role.doctor;
     }
     private static void DistributeSheriff()
     {
         System.Random rnd = new System.Random();
-        sheriffIndex = rnd.Next(Menu.NumberOfPlayers);
-        if (sheriffIndex != mafiaIndex && sheriffIndex != doctorIndex)
+        int[] allNumbers = new int[Menu.NumberOfPlayers];
+        for (int i = 0; i < allNumbers.Length; ++i)
         {
-            PlayersArray[sheriffIndex].role = role.sheriff;
+            allNumbers[i] = i;
         }
-        else
-        {
-            DistributeSheriff();
-        }
+        int[] excludedNumbers = { mafiaIndex, doctorIndex };
+        sheriffIndex = RandomElementSelector.SelectRandomElement(allNumbers, excludedNumbers);
+        PlayersArray[sheriffIndex].role = role.sheriff;
     }
 
     public static void ClearVotes()

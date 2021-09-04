@@ -11,37 +11,49 @@ public class RepeatVoteTalk : MonoBehaviour
 {
     public TMP_Text NameOfPlayerTMP;
     public TMP_Text TimerTMP;
-    public float SeconsLeft = Menu.TalkTime;
+    public float SeconsLeft;
+
+    private bool takingAway;
 
     private int NumOfPlayer = 0;
 
     public void Start()
     {
-        NameOfPlayerTMP.text = Player.PlayersArray[DayLoopVote.indexesNew[NumOfPlayer]].nic + ", говорите";
+        SeconsLeft = Menu.TalkTime;
+        takingAway = false;
+        NameOfPlayerTMP.text = Player.PlayersArray[DayLoopVoteRepeat.indexesVotedNew[NumOfPlayer]].nic + ", speak on";
     }
     void Update()
     {
-        if (SeconsLeft > 0)
+        if (!takingAway && SeconsLeft > 0)
         {
-            SeconsLeft -= Time.deltaTime;
-            TimerTMP.text = Convert.ToString(Convert.ToInt32(SeconsLeft));
+            StartCoroutine(TimerTake());
         }
+    }
+    IEnumerator TimerTake()
+    {
+        takingAway = true;
+        SeconsLeft -= 1;
+        yield return new WaitForSeconds(1);
         if (SeconsLeft <= 0)
         {
-            ++NumOfPlayer;
-            if (NumOfPlayer == DayLoopVote.numOfVoted)
-            {
-                SceneManager.LoadScene("DayLoopVote");
-            }
-            else
-            {
-                NameOfPlayerTMP.text = Player.PlayersArray[DayLoopVote.indexesNew[NumOfPlayer]].nic + ", говорите";
-            }
-            SeconsLeft = Menu.TalkTime;
+            Next();
         }
+        TimerTMP.text = SeconsLeft.ToString();
+        takingAway = false;
     }
     public void Next()
     {
-        SeconsLeft = 0;
+        ++NumOfPlayer;
+        if (NumOfPlayer == DayLoopVoteRepeat.numOfVoted)
+        {
+            SceneManager.LoadScene("DayLoopVoteRepeat");
+        }
+        else
+        {
+            NameOfPlayerTMP.text = Player.PlayersArray[DayLoopVoteRepeat.indexesVotedNew[NumOfPlayer]].nic + ", speak on";
+            TimerTMP.text = SeconsLeft.ToString();
+        }
+        SeconsLeft = Menu.TalkTime;
     }
 }
